@@ -3,25 +3,20 @@ package e1;
 import org.junit.jupiter.api.*;
 import static org.junit.jupiter.api.Assertions.*;
 
-import java.util.Map.Entry;
-import java.util.function.Predicate;
-
-import javax.swing.JButton;
-
 public class LogicTest {
 
   private static final int GRID_SIZE = 5;
-  private static final int KNIGHT_X_COORDINATE = 1;
-  private static final int KNIGHT_Y_COORDINATE = 4;
-  private static final int PAWN_X_COORDINATE = 0;
+  private static final int KNIGHT_X_COORDINATE = 3;
+  private static final int KNIGHT_Y_COORDINATE = 1;
+  private static final int PAWN_X_COORDINATE = 2;
   private static final int PAWN_Y_COORDINATE = 2;
 
   private Logics logics;
 
   @BeforeEach
   public void setUp() {
-    this.logics = new LogicsImpl(GRID_SIZE, new Pair<Integer, Integer>(KNIGHT_X_COORDINATE, KNIGHT_Y_COORDINATE),
-        new Pair<Integer, Integer>(PAWN_X_COORDINATE, PAWN_Y_COORDINATE));
+    this.logics = new LogicsImpl(GRID_SIZE, new Pair<Integer, Integer>(PAWN_X_COORDINATE, PAWN_Y_COORDINATE),
+        new Pair<Integer, Integer>(KNIGHT_X_COORDINATE, KNIGHT_Y_COORDINATE));
   }
 
   @Test
@@ -46,6 +41,36 @@ public class LogicTest {
     Pair<Integer, Integer> knight = this.logics.getKnight();
     boolean arePositionsDifferent = pawn.getX() != knight.getX() || pawn.getY() != knight.getY();
     assertTrue(arePositionsDifferent);
+  }
+
+  @Test
+  public void testKnightMovement() {
+    boolean isWinning = this.logics.hit(1, 0);
+    assertEquals(this.logics.getKnight(), new Pair<Integer, Integer>(1, 0));
+    assertFalse(isWinning);
+  }
+
+  @Test
+  public void testWrongKnightMovement() {
+    this.logics.hit(1, 1);
+    assertFalse(this.logics.getKnight().equals(new Pair<Integer, Integer>(1, 1)));
+    assertTrue(this.logics.getKnight().equals(new Pair<Integer, Integer>(KNIGHT_X_COORDINATE, KNIGHT_Y_COORDINATE)));
+  }
+
+  @Test
+  public void testHitWinningSequence() {
+    Pair<Integer, Integer> pawn = this.logics.getPawn();
+    this.logics.hit(1, 0);
+    boolean isWinning = this.logics.hit(pawn.getX(), pawn.getY());
+    assertTrue(isWinning);
+  }
+
+  @Test
+  public void testHitLosingSequence() {
+    this.logics.hit(1, 0);
+    this.logics.hit(0, 2);
+    boolean isWinning = this.logics.hit(1, 4);
+    assertFalse(isWinning);
   }
 
 }
