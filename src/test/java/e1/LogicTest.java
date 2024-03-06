@@ -4,28 +4,29 @@ import org.junit.jupiter.api.*;
 
 import e1.ChessPiece.Knight;
 import e1.ChessPiece.Pawn;
+import e1.ChessPieceCoordinates.ChessPieceCoordinates;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 public class LogicTest {
 
   private static final int GRID_SIZE = 5;
-  private static final int KNIGHT_X_COORDINATE = 3;
-  private static final int KNIGHT_Y_COORDINATE = 1;
-  private static final int PAWN_X_COORDINATE = 2;
-  private static final int PAWN_Y_COORDINATE = 2;
 
   private Logics logics;
 
   @BeforeEach
   public void setUp() {
-    this.logics = new LogicsImpl(GRID_SIZE, new Pawn(new Pair<>(PAWN_X_COORDINATE, PAWN_Y_COORDINATE)),
-        new Knight(new Pair<>(KNIGHT_X_COORDINATE, KNIGHT_Y_COORDINATE)));
+    this.logics = new LogicsImpl(GRID_SIZE,
+        new Pawn(new Pair<>(ChessPieceCoordinates.PAWN_X_COORDINATE.getValue(),
+            ChessPieceCoordinates.PAWN_Y_COORDINATE.getValue())),
+        new Knight(new Pair<>(ChessPieceCoordinates.KNIGHT_X_COORDINATE.getValue(),
+            ChessPieceCoordinates.KNIGHT_Y_COORDINATE.getValue())));
   }
 
   @Test
   public void testHasPawn() {
-    boolean checkRightPosition = this.logics.hasPawn(PAWN_X_COORDINATE, PAWN_Y_COORDINATE);
+    boolean checkRightPosition = this.logics.hasPawn(ChessPieceCoordinates.PAWN_X_COORDINATE.getValue(),
+        ChessPieceCoordinates.PAWN_Y_COORDINATE.getValue());
     boolean checkWrongPosition = this.logics.hasPawn(0, 0);
     assertTrue(checkRightPosition);
     assertFalse(checkWrongPosition);
@@ -33,7 +34,8 @@ public class LogicTest {
 
   @Test
   public void testHasKnight() {
-    boolean checkRightPosition = this.logics.hasKnight(KNIGHT_X_COORDINATE, KNIGHT_Y_COORDINATE);
+    boolean checkRightPosition = this.logics.hasKnight(ChessPieceCoordinates.KNIGHT_X_COORDINATE.getValue(),
+        ChessPieceCoordinates.KNIGHT_Y_COORDINATE.getValue());
     boolean checkWrongPosition = this.logics.hasKnight(0, 0);
     assertTrue(checkRightPosition);
     assertFalse(checkWrongPosition);
@@ -58,7 +60,8 @@ public class LogicTest {
   public void testWrongKnightMovement() {
     this.logics.hit(1, 1);
     assertFalse(this.logics.getKnight().equals(new Pair<Integer, Integer>(1, 1)));
-    assertTrue(this.logics.getKnight().equals(new Pair<Integer, Integer>(KNIGHT_X_COORDINATE, KNIGHT_Y_COORDINATE)));
+    assertTrue(this.logics.getKnight().equals(new Pair<Integer, Integer>(
+        ChessPieceCoordinates.KNIGHT_X_COORDINATE.getValue(), ChessPieceCoordinates.KNIGHT_Y_COORDINATE.getValue())));
   }
 
   @Test
