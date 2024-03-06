@@ -1,6 +1,10 @@
 package e1;
 
 import org.junit.jupiter.api.*;
+
+import e1.ChessPiece.Knight;
+import e1.ChessPiece.Pawn;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 public class LogicTest {
@@ -15,8 +19,8 @@ public class LogicTest {
 
   @BeforeEach
   public void setUp() {
-    this.logics = new LogicsImpl(GRID_SIZE, new Pair<Integer, Integer>(PAWN_X_COORDINATE, PAWN_Y_COORDINATE),
-        new Pair<Integer, Integer>(KNIGHT_X_COORDINATE, KNIGHT_Y_COORDINATE));
+    this.logics = new LogicsImpl(GRID_SIZE, new Pawn(new Pair<>(PAWN_X_COORDINATE, PAWN_Y_COORDINATE)),
+        new Knight(new Pair<>(KNIGHT_X_COORDINATE, KNIGHT_Y_COORDINATE)));
   }
 
   @Test
@@ -29,7 +33,7 @@ public class LogicTest {
 
   @Test
   public void testHasKnight() {
-    boolean checkRightPosition = this.logics.hasKnight(GRID_SIZE, KNIGHT_X_COORDINATE);
+    boolean checkRightPosition = this.logics.hasKnight(KNIGHT_X_COORDINATE, KNIGHT_Y_COORDINATE);
     boolean checkWrongPosition = this.logics.hasKnight(0, 0);
     assertTrue(checkRightPosition);
     assertFalse(checkWrongPosition);
@@ -46,7 +50,7 @@ public class LogicTest {
   @Test
   public void testKnightMovement() {
     boolean isWinning = this.logics.hit(1, 0);
-    assertEquals(this.logics.getKnight(), new Pair<Integer, Integer>(1, 0));
+    assertEquals(new Pair<Integer, Integer>(1, 0), this.logics.getKnight());
     assertFalse(isWinning);
   }
 
