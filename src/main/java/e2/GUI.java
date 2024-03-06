@@ -40,7 +40,7 @@ public class GUI extends JFrame {
                 drawBoard();
                 handleAutoclicks(pos.getX(), pos.getY());
             }
-            boolean isThereVictory = false; // call the logic here to ask if there is victory
+            boolean isThereVictory = this.logics.isWin();
             if (isThereVictory) {
                 quitGame();
                 JOptionPane.showMessageDialog(this, "You won!!");
