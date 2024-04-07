@@ -2,8 +2,7 @@ package e1;
 
 import java.util.*;
 
-import e1.ChessBoard.PiecesGenerator;
-import e1.ChessBoard.PiecesGeneratorImpl;
+import e1.PiecesGenerator.*;
 import e1.ChessPiece.ChessPiece;
 import e1.ChessPiece.Knight;
 import e1.ChessPiece.Pawn;

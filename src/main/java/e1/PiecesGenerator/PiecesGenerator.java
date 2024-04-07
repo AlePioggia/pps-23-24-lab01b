@@ -1,4 +1,4 @@
-package e1.ChessBoard;
+package e1.PiecesGenerator;
 
 import e1.Pair;
 

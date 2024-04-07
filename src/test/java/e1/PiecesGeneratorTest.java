@@ -6,8 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import e1.ChessBoard.PiecesGenerator;
-import e1.ChessBoard.PiecesGeneratorImpl;
+import e1.PiecesGenerator.*;
 
 public class PiecesGeneratorTest {
     private final static int SIZE = 8;

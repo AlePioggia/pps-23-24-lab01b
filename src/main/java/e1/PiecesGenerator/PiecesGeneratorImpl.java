@@ -1,5 +1,5 @@
 
-package e1.ChessBoard;
+package e1.PiecesGenerator;
 
 import java.util.Random;
 
